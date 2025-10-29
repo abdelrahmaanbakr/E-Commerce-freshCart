@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 body {
   font-family: 'Encode Sans Expanded', sans-serif;
 }
@@ -25,7 +27,7 @@ body {
     
 }
 @layer components{
-    .btn{
+    .btn{   
         @apply py-3 px-6 rounded-md border-gray-500 bg-main
     }
     .nav-item {
