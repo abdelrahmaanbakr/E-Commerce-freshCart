@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router";
-import { TokenContext } from "../Context/Token.context";
+import { Navigate } from "react-router-dom";
+import { TokenContext } from "../Context/TokenContext";
 
 export default function ProtectedRoute({ children }) {
 const { token } = useContext(TokenContext);

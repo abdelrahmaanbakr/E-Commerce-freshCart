@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
-
+import Loader from "../Loader/Loader";
+import { API_BASE_URL } from "../../config/env";
 
 export default function Brands() {
   async function getAllBrands() {
     const option = {
-      url: `https://ecommerce.routemisr.com/api/v1/brands`,
+      url: `${API_BASE_URL}/brands`,
       method: "get",
     };
 
     return await axios.request(option);
   }
 
-  const { data, isError, isLoading , id } = useQuery({
+  const { data, isError, isLoading } = useQuery({
     queryKey: ["brands"],
     queryFn: getAllBrands,
     refetchOnMount: false,
@@ -23,6 +23,7 @@ export default function Brands() {
   if (isLoading) {
     return <Loader />;
   }
+
   if (isError) {
     return <h2>Error</h2>;
   }
@@ -36,15 +37,14 @@ export default function Brands() {
             key={brand._id}
           >
             <Link to={`/brandsDetails/${brand._id}`}>
-              <div className=" ">
-              <img className="w-full " src={brand.image} />
-              <div className="absolute  inset-0 opacity-0  bg-gray-500/40 group-hover:opacity-100  transition-all"></div>
-            </div>
+              <div>
+                <img className="w-full" src={brand.image} alt={brand.name} />
+                <div className="absolute inset-0 opacity-0 bg-gray-500/40 group-hover:opacity-100 transition-all"></div>
+              </div>
             </Link>
-          
 
             <div className="p-2">
-              <h3 className="text-xl font-semibold ">{brand.name}</h3>
+              <h3 className="text-xl font-semibold">{brand.name}</h3>
             </div>
           </div>
         ))}

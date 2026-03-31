@@ -1,10 +1,11 @@
 import axios from "axios";
 import { Star } from "lucide-react";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { CartContext } from "../Context/Cart.context";
+import { useParams } from "react-router-dom";
+import { CartContext } from "../Context/CartContext";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import { API_BASE_URL } from "../../config/env";
 
 
 export default function ProductDetails() {
@@ -13,28 +14,26 @@ export default function ProductDetails() {
 
   const { id } = useParams();
 
-  async function getProductDetails() {
-    const loading= toast.loading("loading..")
-    try {
-         const option = {
-      url: `https://ecommerce.routemisr.com/api/v1/products/${id}`,
-      method: "get",
-    };
-    const { data } = await axios.request(option);
-    setProductDetails(data.data);
-
-  }
-  catch (error) {
-        console.log(error)
-    }finally{
-        toast.dismiss(loading)
-    }
-    } 
-   
-
   useEffect(() => {
+    async function getProductDetails() {
+      const loading = toast.loading("loading..");
+
+      try {
+        const option = {
+          url: `${API_BASE_URL}/products/${id}`,
+          method: "get",
+        };
+        const { data } = await axios.request(option);
+        setProductDetails(data.data);
+      } catch {
+        toast.error("Unable to load product details");
+      } finally {
+        toast.dismiss(loading);
+      }
+    }
+
     getProductDetails();
-  }, []);
+  }, [id]);
 
   return (
     <>

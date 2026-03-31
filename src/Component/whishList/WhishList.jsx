@@ -1,20 +1,22 @@
 import axios from "axios";
 import { useContext } from "react";
-import { TokenContext } from "../Context/Token.context";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader/Loader";
+import { TokenContext } from "../Context/TokenContext";
+import { API_BASE_URL } from "../../config/env";
 
 export default function WhishList() {
   const { token } = useContext(TokenContext);
 
   async function fetchWishlist() {
     const option = {
-      url: `https://ecommerce.routemisr.com/api/v1/wishlist`,
+      url: `${API_BASE_URL}/wishlist`,
       method: "get",
       headers: {
         token,
       },
     };
+
     return await axios.request(option);
   }
 
@@ -27,11 +29,11 @@ export default function WhishList() {
   if (isLoading) {
     return <Loader />;
   }
+
   if (isError) {
     return <h2>error</h2>;
   }
 
-  // هنا المهم: نوصل للـ array الصح
   const products = data?.data?.data || [];
 
   return (

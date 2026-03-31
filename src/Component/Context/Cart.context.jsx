@@ -1,41 +1,22 @@
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
-import { TokenContext } from "./Token.context";
+import { useCallback, useContext, useState } from "react";
+import { TokenContext } from "./TokenContext";
 import { toast } from "react-toastify";
-
-export const CartContext = createContext(null);
+import { CartContext } from "./CartContext";
+import { API_BASE_URL } from "../../config/env";
 
 export default function CartProvider({ children }) {
   const { token } = useContext(TokenContext);
   const [cartInfo, setCartInfo] = useState(null);
 
-  async function addToCart(productId) {
-    const loading = toast.loading("loading..");
-    try {
-      const option = {
-        url: "https://ecommerce.routemisr.com/api/v1/cart",
-        method: "post",
-        data: { productId },
-        headers: { token },
-      };
-
-      const { data } = await axios.request(option);
-      if (data.status == "success") {
-        toast.success(data.message);
-      }
-      console.log("Cart Response:", data);
-      displayToCart();
-    } catch (err) {
-      console.error("Error adding to cart:", err);
-      toast.error("Error adding to cart");
-    } finally {
-      toast.dismiss(loading);
+  const displayToCart = useCallback(async () => {
+    if (!token) {
+      setCartInfo(null);
+      return null;
     }
-  }
 
-  async function displayToCart() {
     const option = {
-      url: "https://ecommerce.routemisr.com/api/v1/cart",
+      url: `${API_BASE_URL}/cart`,
       method: "get",
       headers: {
         token,
@@ -43,14 +24,37 @@ export default function CartProvider({ children }) {
     };
     const { data } = await axios.request(option);
     setCartInfo(data);
-  }
+    return data;
+  }, [token]);
 
-  async function deleteItem(itemId) {
+  const addToCart = useCallback(async (productId) => {
+    const loading = toast.loading("loading..");
+    try {
+      const option = {
+        url: `${API_BASE_URL}/cart`,
+        method: "post",
+        data: { productId },
+        headers: { token },
+      };
+
+      const { data } = await axios.request(option);
+      if (data.status === "success") {
+        toast.success(data.message);
+      }
+      await displayToCart();
+    } catch {
+      toast.error("Error adding to cart");
+    } finally {
+      toast.dismiss(loading);
+    }
+  }, [displayToCart, token]);
+
+  const deleteItem = useCallback(async (itemId) => {
     const loading = toast.loading("loading..");
 
     try {
       const option = {
-        url: `https://ecommerce.routemisr.com/api/v1/cart/${itemId}`,
+        url: `${API_BASE_URL}/cart/${itemId}`,
         method: "delete",
         headers: {
           token,
@@ -60,33 +64,39 @@ export default function CartProvider({ children }) {
 
       setCartInfo(data);
       toast.success("item removed successfully");
-    } catch (error) {
+    } catch {
       toast.error("error..");
     } finally {
       toast.dismiss(loading);
     }
-  }
+  }, [token]);
 
-  async function clearAllCart() {
+  const clearAllCart = useCallback(async () => {
+    if (!token) {
+      setCartInfo({
+        numOfCartItems: 0,
+      });
+      return;
+    }
+
     const option = {
-      url: "https://ecommerce.routemisr.com/api/v1/cart",
+      url: `${API_BASE_URL}/cart`,
       method: "delete",
       headers: {
         token,
       },
     };
-    const { data } = await axios.request(option);
-    console.log(data);
+    await axios.request(option);
     setCartInfo({
       numOfCartItems: 0,
     });
-  }
+  }, [token]);
 
- async function updateCount(productID,count){
+ const updateCount = useCallback(async (productID,count) => {
   const loading= toast.loading('loading..')
   try {
      const option={
-      url:`https://ecommerce.routemisr.com/api/v1/cart/${productID}`,
+      url:`${API_BASE_URL}/cart/${productID}`,
       method:'put',
       data:{
         count,
@@ -98,13 +108,13 @@ export default function CartProvider({ children }) {
     const{data}= await axios.request(option)
     setCartInfo(data)
     toast.success('Count Updated')
-  } catch (error) {
+  } catch {
     toast.error('Error Updata')
   }finally{
     toast.dismiss(loading)
   }
    
-  }
+  }, [token]);
 
   return (
     <CartContext.Provider

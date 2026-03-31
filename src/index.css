@@ -18,7 +18,7 @@ body {
 }
 
 @utility container{
-    @apply mx-auto pt-4 sm:px-6 lg:px-8
+    @apply mx-auto pt-4 sm:px-6 lg:px-8;
 }
 @layer components{
     .form-control{

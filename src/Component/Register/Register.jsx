@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import * as yup from "yup";
+import { API_BASE_URL } from "../../config/env";
 
 export default function Register() {
   const nameRegex = /^[A-Z][a-zA-Z]*$/;
@@ -59,19 +60,18 @@ export default function Register() {
     try {
       setError(null);
       const options = {
-        url: "https://ecommerce.routemisr.com/api/v1/auth/signup",
+        url: `${API_BASE_URL}/auth/signup`,
         method: "POST",
         data: values,
         
       };
    
 
-      const { data } = await axios.request(options);
+      await axios.request(options);
          toast.success('Regist Successfully')
          setTimeout(() => {
           navigate('/login')
          }, 2000);
-      console.log(data);
     } catch (error) {
       setError(error.response.data.message);
       toast.error(error.response.data.message)

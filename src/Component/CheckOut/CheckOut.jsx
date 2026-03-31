@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
 import React, { useContext, useState } from "react";
-import { CartContext } from "../Context/Cart.context";
-import { TokenContext } from "../Context/Token.context";
+import { CartContext } from "../Context/CartContext";
+import { TokenContext } from "../Context/TokenContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL, APP_BASE_URL } from "../../config/env";
 
 export default function CheckOut() {
   const { cartInfo } = useContext(CartContext);
@@ -20,7 +21,7 @@ export default function CheckOut() {
 
     try {
        const option = {
-      url: `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartInfo.cartId}?url=http://localhost:5173`,
+      url: `${API_BASE_URL}/orders/checkout-session/${cartInfo.cartId}?url=${encodeURIComponent(APP_BASE_URL)}`,
       method: "post",
        data: test,
         headers: {
@@ -31,11 +32,11 @@ export default function CheckOut() {
     const { data } = await axios.request(option);
       toast.success("online order created");
 
-      location.replace(data.session.url)
+      window.location.replace(data.session.url)
 
 
-    } catch (error) {
-      console.log(error)
+    } catch {
+      toast.error("Unable to create online order")
     }finally {
       toast.dismiss(ayhaga);
     }
@@ -50,21 +51,20 @@ export default function CheckOut() {
     const ayhaga = toast.loading("loading...");
     try {
       const option = {
-        url: `https://ecommerce.routemisr.com/api/v1/orders/${cartInfo.cartId}`,
+        url: `${API_BASE_URL}/orders/${cartInfo.cartId}`,
         method: "post",
         data: test,
         headers: {
           token,
         },
       };
-      const { data } = await axios.request(option);
-      console.log(data);
+      await axios.request(option);
       toast.success("cash order created");
       setTimeout(() => {
         navigate("/allOrder");
       }, 1000);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      toast.error("Unable to create cash order");
     } finally {
       toast.dismiss(ayhaga);
     }
@@ -88,6 +88,11 @@ export default function CheckOut() {
   return (
     <div className=" mb-10">
       <h2 className="text-2xl font-semibold py-5">Fill Your Details</h2>
+      {!cartInfo?.cartId && (
+        <p className="mb-4 rounded-md bg-yellow-100 px-4 py-3 text-yellow-800">
+          Add items to your cart before starting checkout.
+        </p>
+      )}
       <form onSubmit={formik.handleSubmit}>
         <div className=" form-control">
           <label htmlFor="">City</label>
@@ -126,6 +131,7 @@ export default function CheckOut() {
               setPayment("cash");
             }}
             type="submit"
+            disabled={!cartInfo?.cartId}
             className="bg-blue-600 text-white text-xl px-4 py-2 rounded-md "
           >
             Create Cash Order
@@ -135,6 +141,7 @@ export default function CheckOut() {
               setPayment("online");
             }}
             type="submit"
+            disabled={!cartInfo?.cartId}
             className="bg-main text-white text-xl px-4 py-2 rounded-md"
           >
             Create Online Order
