@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  // Use absolute asset paths so Vercel serves bundles correctly on nested routes.
+  base: "/",
   plugins: [react(), tailwindcss()],
   build: {
     outDir: "dist",
