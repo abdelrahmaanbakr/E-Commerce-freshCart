@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer'
 
 export default function Layout() {
   return (
-    <div>
+    <div className="min-h-screen bg-white text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
         <Navbar/>
 
         <div className="container mt-25">

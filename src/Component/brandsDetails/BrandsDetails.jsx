@@ -35,7 +35,7 @@ export default function BrandsDetails() {
 
   return (
     <div className="p-5">
-      <div className="rounded-md shadow-md p-3">
+      <div className="rounded-md p-3 shadow-md transition-colors dark:bg-slate-900">
         <img src={brand.image} alt={brand.name} className="w-60" />
         <h3 className="text-2xl font-semibold mt-3 px-5">{brand.name}</h3>
       </div>

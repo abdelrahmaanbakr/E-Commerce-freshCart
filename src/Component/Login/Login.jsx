@@ -77,7 +77,7 @@ export default function Login() {
           </label>
 
           <input
-            className="form-control bg-slate-100 w-full"
+            className="form-control w-full bg-slate-100 dark:bg-slate-800"
             type="email"
             placeholder="enter your email"
             name="email"
@@ -98,7 +98,7 @@ export default function Login() {
 
           <div className="relative">
             <input
-              className="form-control bg-slate-100 w-full"
+              className="form-control w-full bg-slate-100 dark:bg-slate-800"
               type={passType ? "password" : "text"}
               placeholder="enter your password"
               name="password"
@@ -107,7 +107,7 @@ export default function Login() {
               onBlur={formik.handleBlur}
             />
             <Eye
-              className="absolute top-[20%] right-4 cursor-pointer"
+              className="absolute top-[20%] right-4 cursor-pointer text-slate-700 dark:text-slate-200"
               onClick={() => {
                 setPassType(!passType);
               }}

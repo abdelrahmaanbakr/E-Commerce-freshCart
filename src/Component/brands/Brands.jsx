@@ -33,7 +33,7 @@ export default function Brands() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-8 my-10">
         {data.data.data.map((brand) => (
           <div
-            className="rounded-md group relative cursor-pointer shadow-md"
+            className="group relative cursor-pointer rounded-md shadow-md transition-colors dark:bg-slate-900"
             key={brand._id}
           >
             <Link to={`/brandsDetails/${brand._id}`}>

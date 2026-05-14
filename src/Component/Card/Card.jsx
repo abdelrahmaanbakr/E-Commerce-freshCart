@@ -50,7 +50,7 @@ export default function Card({ props }) {
 
   return (
     <div>
-      <div className="card bg-white shadow-lg group">
+      <div className="card bg-white shadow-lg group dark:bg-slate-900">
         <div className="card-img relative">
           <img src={imageCover} alt={title} />
           <div className="absolute flex justify-center items-center gap-2 inset-0 bg-gray-500/40 group-hover:opacity-100 opacity-0 transition-all">
@@ -79,7 +79,7 @@ export default function Card({ props }) {
             </h3>
           </div>
 
-          <p className="text-slate-500 line-clamp-2">{description}</p>
+          <p className="text-slate-500 line-clamp-2 dark:text-slate-300">{description}</p>
           <div className="flex justify-between items-center">
             <h3 className="font-semibold text-lg">{price}</h3>
             <h3 className="font-semibold text-lg flex items-center gap-1">

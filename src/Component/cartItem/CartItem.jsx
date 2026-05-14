@@ -8,7 +8,7 @@ export default function CartItem({ cartinfo }) {
   const { deleteItem, updateCount } = useContext(CartContext);
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center rounded-md bg-white p-3 transition-colors dark:bg-slate-800">
       <div className="flex gap-3">
         <img className="w-40" src={imageCover} alt={title} />
 

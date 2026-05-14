@@ -97,7 +97,7 @@ export default function Register() {
             name:
           </label>
           <input
-            className="form-control w-full bg-slate-100"
+            className="form-control w-full bg-slate-100 dark:bg-slate-800"
             type="text"
             placeholder="enter your first name"
             name="name"
@@ -119,7 +119,7 @@ export default function Register() {
           </label>
 
           <input
-            className="form-control bg-slate-100 w-full"
+            className="form-control w-full bg-slate-100 dark:bg-slate-800"
             type="email"
             placeholder="enter your email"
             name="email"
@@ -139,7 +139,7 @@ export default function Register() {
           </label>
 
           <input
-            className="form-control bg-slate-100 w-full"
+            className="form-control w-full bg-slate-100 dark:bg-slate-800"
             type="password"
             placeholder="enter your password"
             name="password"
@@ -159,7 +159,7 @@ export default function Register() {
           </label>
 
           <input
-            className="form-control bg-slate-100 w-full"
+            className="form-control w-full bg-slate-100 dark:bg-slate-800"
             type="password"
             placeholder="confirm your password"
             name="rePassword"
@@ -179,7 +179,7 @@ export default function Register() {
           </label>
 
           <input
-            className="form-control bg-slate-100 w-full"
+            className="form-control w-full bg-slate-100 dark:bg-slate-800"
             type="text"
             placeholder="confirm your phone"
             name="phone"

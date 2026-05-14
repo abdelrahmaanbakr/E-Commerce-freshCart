@@ -8,17 +8,17 @@ import googlePlay from "../../assets/Images/get-google-play.png";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-slate-100 w-full py-8">
+      <footer className="w-full bg-slate-100 py-8 text-slate-900 transition-colors dark:bg-slate-900 dark:text-slate-100">
         <div className="container space-y-6">
           <div>
             <h3 className="text-xl font-semibold sm:text-2xl">Get the FreshCart App</h3>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500 sm:text-base">
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500 dark:text-slate-300 sm:text-base">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. At dolore
               aliquid ipsam esse accusantium tempora!
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 border-b border-slate-300 pb-6 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-3 border-b border-slate-300 pb-6 dark:border-slate-700 sm:flex-row sm:items-center">
             <input
               className="form-control min-h-12 w-full grow"
               type="email"

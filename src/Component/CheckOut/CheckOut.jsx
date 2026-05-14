@@ -89,7 +89,7 @@ export default function CheckOut() {
     <div className=" mb-10">
       <h2 className="text-2xl font-semibold py-5">Fill Your Details</h2>
       {!cartInfo?.cartId && (
-        <p className="mb-4 rounded-md bg-yellow-100 px-4 py-3 text-yellow-800">
+        <p className="mb-4 rounded-md bg-yellow-100 px-4 py-3 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-200">
           Add items to your cart before starting checkout.
         </p>
       )}
@@ -97,7 +97,7 @@ export default function CheckOut() {
         <div className=" form-control">
           <label htmlFor="">City</label>
           <input
-            className=" w-full rounded-md bg-slate-100 px-6 py-3 "
+            className="w-full rounded-md bg-slate-100 px-6 py-3 transition-colors focus:outline-none dark:bg-slate-800 dark:text-slate-100"
             name="city"
             value={formik.values.city}
             onChange={formik.handleChange}
@@ -107,7 +107,7 @@ export default function CheckOut() {
         <div className=" form-control">
           <label htmlFor="">Phone</label>
           <input
-            className=" w-full rounded-md bg-slate-100 px-6 py-3 "
+            className="w-full rounded-md bg-slate-100 px-6 py-3 transition-colors focus:outline-none dark:bg-slate-800 dark:text-slate-100"
             name="phone"
             value={formik.values.phone}
             onChange={formik.handleChange}
@@ -117,7 +117,7 @@ export default function CheckOut() {
         <div className=" form-control">
           <label htmlFor="">Details</label>
           <input
-            className=" w-full rounded-md bg-slate-100 px-6 py-3 "
+            className="w-full rounded-md bg-slate-100 px-6 py-3 transition-colors focus:outline-none dark:bg-slate-800 dark:text-slate-100"
             name="details"
             value={formik.values.details}
             onChange={formik.handleChange}

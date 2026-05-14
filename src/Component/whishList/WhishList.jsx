@@ -39,7 +39,7 @@ export default function WhishList() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-5 my-4">
       {products.map((product) => (
-        <div key={product._id} className="shadow p-2 rounded bg-white">
+        <div key={product._id} className="rounded bg-white p-2 shadow transition-colors dark:bg-slate-900">
           <img
             className="w-full"
             src={product.imageCover}

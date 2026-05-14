@@ -38,7 +38,7 @@ export default function Order() {
   return (
     <>
       {orders.map((order) => (
-        <div key={order.id} className="border-3 border-gray-500/40 my-10">
+        <div key={order.id} className="my-10 border-3 border-gray-500/40 transition-colors dark:border-slate-700 dark:bg-slate-900">
           <div className="p-4 flex justify-between items-center">
             <div>
               <h3 className="text-xl font-light">order ID:</h3>
@@ -58,7 +58,7 @@ export default function Order() {
 
           {order.cartItems.map((product) => (
             <div key={product.product.id} className="grid grid-cols-6 p-6 gap-5">
-              <div className="border-3 space-y-4 border-gray-500/50 rounded-md">
+              <div className="space-y-4 rounded-md border-3 border-gray-500/50 transition-colors dark:border-slate-700 dark:bg-slate-800">
                 <img className="w-full" src={product.product.imageCover} alt="" />
                 <div className="space-y-2 p-2">
                   <Link to={`/productDetails/${product.product.id}`}>

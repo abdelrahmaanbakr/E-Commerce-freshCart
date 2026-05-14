@@ -15,7 +15,7 @@ export default function Cart() {
 
   if (!cartInfo || cartInfo?.numOfCartItems === 0) {
     return (
-      <section className="bg-gray-200 p-5 my-10">
+      <section className="bg-gray-200 p-5 my-10 transition-colors dark:bg-slate-900">
         <h2 className="text-2xl font-semibold flex items-center gap-3 py-2">
           Shop To Cart <FontAwesomeIcon icon={faShoppingCart} />
         </h2>
@@ -52,7 +52,7 @@ export default function Cart() {
 
   return (
     <>
-      <section className="bg-gray-200 p-5 my-10">
+      <section className="bg-gray-200 p-5 my-10 transition-colors dark:bg-slate-900">
         <h2 className="text-2xl font-semibold flex items-center gap-3 py-2">
           Shop To Cart <FontAwesomeIcon icon={faShoppingCart} />
         </h2>
